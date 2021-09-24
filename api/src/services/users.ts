@@ -339,7 +339,7 @@ export class UsersService extends ItemsService {
 			throw new InvalidPayloadException(`Email address ${email} hasn't been invited.`);
 		}
 
-		const passwordHashed = generateHash(password);
+		const passwordHashed = await generateHash(password);
 
 		await this.knex('directus_users').update({ password: passwordHashed, status: 'active' }).where({ id: user.id });
 
